@@ -1,4 +1,5 @@
 import datetime
+from pathlib import Path
 
 import pandas as pd
 from sqlalchemy import create_engine
@@ -6,10 +7,11 @@ from uuid import uuid4
 
 import os
 
-from db_check import check_columns
+from src.db_check import check_columns
 from dotenv import load_dotenv
 
-load_dotenv('../.env')
+BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / '.env')
 
 
 def convert_to_db(import_file: str, table_name: str):

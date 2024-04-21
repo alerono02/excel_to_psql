@@ -15,11 +15,15 @@ def check_columns(df, table_name: str):
     conn.autocommit = True
     cursor = conn.cursor()
 
-    sql = f'''SELECT * FROM {table_name}'''
+    # sql = f'''SELECT * FROM {table_name}'''
+    sql = f'''
+    SELECT column_name FROM information_schema.columns 
+    WHERE table_name = '{table_name}' 
+    ORDER BY ordinal_position;'''
     # изменить на получение названия column
     start_time = time.time()
     cursor.execute(sql)
-    column_names_db = [desc[0] for desc in cursor.description]
+    column_names_db = [row[0] for row in cursor]
     if len(column_names_db) == len(df.columns):
         for i in range(len(column_names_db)):
             if column_names_db[i] != df.columns[i]:
