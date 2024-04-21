@@ -1,10 +1,9 @@
 import datetime
-import time
 
 import pandas as pd
 from sqlalchemy import create_engine
 from uuid import uuid4
-from sys import argv
+
 import os
 
 from db_check import check_columns
@@ -28,7 +27,7 @@ def convert_to_db(import_file: str, table_name: str):
     -------
     """
     if import_file.endswith('.csv'):
-    # read in csv file
+        # read in csv file
         print("CSV file uploaded")
         df = pd.read_csv(import_file, encoding="cp1251", low_memory=False)
     elif import_file.endswith('.xls') or import_file.endswith('.xlsx'):
@@ -49,10 +48,3 @@ def convert_to_db(import_file: str, table_name: str):
     engine.connect()
     df.to_sql(name=table_name, con=engine, if_exists='append', index=False)
     print(f'{len(df)} lines successfully added to SQL table {table_name}')
-
-
-if __name__ == '__main__':
-    path = os.path.abspath(argv[1])
-    start_time = time.time()
-    convert_to_db(import_file=argv[1], table_name=argv[2])
-    print("--- %s seconds ---" % (time.time() - start_time))
