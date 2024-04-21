@@ -2,6 +2,7 @@
 ---
 
 **Предустановка**
+- Создать таблицу в PostgreSQL
 - Создайте файл `.env` и укажите параметры на основе `.env.example`
 - Закинуть импортируемый файл в директорию проекта
 
@@ -9,7 +10,7 @@
 >pip3 install -r requirements.txt
 
 **Запуск скрипта**
->python3 script.py {_**filename.csv**_} {_**db_table_name**_}`
+>python3 main.py {_**filename.csv**_} {_**db_table_name**_}`
  
 **Экземпляр таблицы в БД**
 -----
